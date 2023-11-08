@@ -1,0 +1,102 @@
+
+body{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.background{
+    height: 1265px;
+    background-color: rgb(237, 238, 241);
+    width:100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-x:hidden;
+  }
+.text{
+    text-align: center;
+    color: #0e0d0d;
+    padding: 25px;
+    font-size: 25px;
+    font-weight: 600;
+}
+.btn-start{
+    text-align: center;
+}
+.btn-sensor{
+    text-align:  center;
+    padding-top: 10px;
+    color:#0e0d0d;
+    font-size: 20px;
+}
+button{
+    background-color: rgb(80, 176, 181);
+    border-radius:20px;
+    padding: 15px;
+    font-size: 25px;
+    color: rgb(56, 76, 74); padding: 15px;
+    cursor: pointer;
+}
+.content-center {
+  margin-top: 50px;
+  margin-left: 362px;
+  size: auto;  
+
+}
+.icon{
+    display: inline;
+    width: 30px;
+    padding-left: 20px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+.footer{
+    float: left;
+    width: 100%;
+    color: white;
+    min-height: 150px;
+    padding-top: 200px;
+}
+.row{
+    float: left;
+    width: 100%;
+    margin-bottom: 20pt;
+}
+.boxcenter{
+    width: 50%;
+    margin: 0 auto; 
+}
+.boxfooter1{
+    width: 55%;
+    float: left;
+ 
+}
+.boxfooter2{
+    width: 45%;
+    float: left;
+}
+.textcenter{
+    text-align: center;
+    color: #1a1515;
+}
+.mr{
+    margin-top: 10px;
+    color:rgb(79, 84, 83);
+}
+.add{
+    color:rgb(67, 63, 63);
+    text-align: left;
+}
+.textlogo{
+    text-align: center;
+    font-size: 100px;
+    color: red;
+}
+.color{
+    color: #0e0d0d;
+    text-align: left;
+}
+.icon{
+    margin-left: 34%;
+    font-size: 60px;
+    
+}
