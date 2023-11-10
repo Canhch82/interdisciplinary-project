@@ -1,11 +1,18 @@
 #include <WiFi.h>
 #include <ESPAsyncWebSrv.h>
 #include <AsyncTCP.h>
+#include "MS5837.h"
+#include <Wire.h>
+MS5837 sensor;
+int floo = 7;
+float chuan = 3.0;
+float h = 0; // do cao
 
+float t; int k = 0;
+float fist[2];
 const char* ssid = "SSA_LAB";
 const char* password = "12345687990";
 
-float t = 0;
 
 AsyncWebServer server(80);
 
@@ -137,7 +144,7 @@ button{
     <div class = "btn-sensor">
         <i class="fas fa-ruler-combined"></i>
         <span>Number of floors:</span> 
-        <span id="temperature">%TEMPERATURE%</span>
+        <span id="floors">%FLOORS%</span>
     </div>
      
     <footer class = "footer">
@@ -162,30 +169,52 @@ button{
     </footer>>
   </div>
 </body>
-<script>
+ <script>
 setInterval(function ( ) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("temperature").innerHTML = this.responseText;
+      document.getElementById("floors").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "/temperature", true);
+  xhttp.open("GET", "/floors", true);
   xhttp.send();
 }, 1000 ) ;
 </script>
 </html>)rawliteral";
 
-String fakedata(){
-  for(int i=0;;i++){
-     t = rand() + 1;
-     return String(t);
-   }    
+int tmp;
+int main(float fist, float second){
+    tmp = fist - second;
+    if(tmp == chuan){
+      return 1;
+    }
+    if(tmp == -(chuan)){
+      return -1;
+    }
+    return 0;
+}
+;
+  String tranferdata(){
+  float currentAltitude = (1-pow((sensor.pressure()/1013.25),.190284))*145366.45*.3048;
+  if(k==0){
+    fist[k] = currentAltitude;
+  }
+  k++;
+  int floorChange = main(currentAltitude, fist[0]);
+    floo += floorChange;
+    if (floorChange != 0) 
+    {
+    fist[0] = currentAltitude;
+    }
+    return (String)floo;    
   }  
+  // put your main code here, to run repeatedly:
+ 
 String processor(const String& var){
   //Serial.println(var);
-  if(var == "TEMPERATURE"){
-    return fakedata();
+  if(var == "FLOORS"){
+    return tranferdata();
   }
   return String();
 }
@@ -200,13 +229,15 @@ void setup() {
     Serial.println("Connecting to WiFi..");
   }
   Serial.println(WiFi.localIP());
-  
+   
+  Wire.begin();
+  sensor.init();
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/html", index_html);
   });
-  server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send_P(200, "text/plain", fakedata().c_str());
+  server.on("/floors", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/plain", tranferdata().c_str());
   });
   // Start server
   server.begin(); 
@@ -214,7 +245,6 @@ void setup() {
 
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
 }
 
