@@ -11,8 +11,8 @@ float h = 0; // do cao
 
 float t; int k = 0;
 float fist[2];
-const char* ssid = "Canh";
-const char* password = "12345678";
+const char* ssid = "SSA_LAB";
+const char* password = "12345687990"; 
 
 
 AsyncWebServer server(80);
@@ -206,21 +206,21 @@ String readsensor() {
   else {
       Serial.println(pa);
       float currentAltitude = (1-pow((pa/1013.25),.190284))*145366.45*.3048;
-      Serial.println(currentAltitude);
+      //Serial.println(currentAltitude);
   if(k==0){
     fist[k] = currentAltitude;
   }
   k++;
   int floorChange = main(currentAltitude, fist[0]);
-    Serial.println(floorChange);
+    //Serial.println(floorChange);
     floo += floorChange;
     if (floorChange != 0) 
     {
     fist[0] = currentAltitude;
     }
-    Serial.println(floo);
-    return String(floo);  
+    //Serial.println(floo);
   }
+   return String(floo);  
 }
 //  String fakedata(){
 //  float currentAltitude = (1-pow((sensor.pressure()/1013.25),.190284))*145366.45*.3048;
@@ -235,8 +235,6 @@ String readsensor() {
 //    fist[0] = currentAltitude;
 //    }
 //  }  
-  // put your main code here, to run repeatedly:
- 
 String processor(const String& var){
   //Serial.println(var);
   if(var == "FLOORS"){
@@ -272,6 +270,7 @@ void setup() {
   server.begin(); 
 }
 void loop() {
+  // put your main code here, to run repeatedly:
 //  sensor.read();
 //     
 // float currentAltitude = (1-pow((sensor.pressure()/1013.25),.190284))*145366.45*.3048;
@@ -284,8 +283,7 @@ void loop() {
 //    if (floorChange != 0) 
 //    {
 //    fist[0] = currentAltitude;
-//    }
-    
+//    }   
 }
 
   
